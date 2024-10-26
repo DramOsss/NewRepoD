@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+
+{% block content %}
+    <h1>Egresados</h1>
+
+    <a href="{% url 'egresado_add' %}">Add</a> 
+
+    <ul>
+        {% for egresado in egresados %}
+            <li>
+                {% if egresado and egresado.id_egresado %}
+                <p>{{egresado.id_egresado}}</p>
+                <p>{{egresado.nombre_egresado}}</p>
+                <a href="{% url 'egresado_edit' egresado.id_egresado %}">Editar</a>
+                <a href="{% url 'egresado_delete' egresado.id_egresado %}">Eliminar</a>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No hay egresados disponibles.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolicitudesEmpresarias App</title>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            {% if user.is_authenticated %}
+            <ul>
+                <li>
+                    <a href="/home">Home</a>
+                </li>
+            
+                <li>
+                    <strong>Mantenimientos</strong>
+                    <ul>
+                        <li>
+                            <a href="/ocupaciones">Ocupación</a>
+                        </li>
+                        <li>
+                            <a href="/egresados">Egresado</a>
+                        </li>
+                        <li>
+                            <a href="/empresas">Empresa</a>
+                        </li>
+                    </ul>
+                </li>
+            
+                <li>
+                    <strong>Procesos</strong>
+                    <ul>
+                        <li>
+                            <a href="/solicitudes">Solicitud</a>
+                        </li>
+                    </ul>
+                </li>
+            
+                <li>
+                    <a href="/logout">Logout</a>
+                </li>
+            </ul>
+            {% else %}
+            <li>
+                <a href="/">Home</a>    
+            </li>
+            <li>
+                <a href="/signup">SignUp</a>
+            </li>
+            <li>
+                <a href="/signin">SignIn</a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+
+    {% block content %}
+    {% endblock  %}
+
+</body>
+</html>

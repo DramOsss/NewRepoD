@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+
+{% block content %}
+    <h1>Ocupaciones</h1>
+
+    <a href="{% url 'ocupacion_add' %}">Add</a> 
+
+    <ul>
+        {% for ocupacion in ocupaciones %}
+            <li>
+                {% if ocupacion and ocupacion.id_ocupacion %}
+                <p>{{ocupacion.id_ocupacion}}</p>
+                <p>{{ocupacion.nombre_ocupacion}}</p>
+                <a href="{% url 'ocupacion_edit' ocupacion.id_ocupacion %}">Editar</a>
+                <a href="{% url 'ocupacion_delete' ocupacion.id_ocupacion %}">Eliminar</a>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No hay ocupaciones disponibles.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

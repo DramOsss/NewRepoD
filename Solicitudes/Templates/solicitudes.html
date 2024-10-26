@@ -1,0 +1,36 @@
+{% extends 'base.html'%}
+
+{% block content %}
+    <h1>Solicitudes</h1>
+
+    <a href="{% url 'solicitud_add' %}">Add</a> 
+
+    <ul>
+        {% for solicitud in solicitudes %}
+            <li>
+                {% if solicitud and solicitud.id_solicitud %}
+                <a href="{% url 'detalles_solicitud' solicitud.id_solicitud %}">
+                    <p>{{ solicitud.id_solicitud }}</p>
+                    <p>{{ solicitud.fecha_solicitud }}</p>
+                    <p>{{ solicitud.perfil_solicitud }}</p>
+                </a>
+                <a href="{% url 'solicitud_edit' solicitud.id_solicitud %}">Editar</a>
+                <a href="{% url 'solicitud_delete' solicitud.id_solicitud %}">Eliminar</a>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No hay solicituds disponibles.</li>
+        {% endfor %}
+
+
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </ul>
+{% endblock %}

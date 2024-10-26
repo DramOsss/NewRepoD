@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    <h1>Eliminar Egresado</h1>
+    
+    <p>¿Estás seguro de que deseas eliminar el egregsado "<strong>{{ egresado.nombre_egresado }}</strong>"?</p>
+    
+    <form method="post">
+        {% csrf_token %}
+
+        <button type="submit">Confimar</button>
+    </form>
+{% endblock %}

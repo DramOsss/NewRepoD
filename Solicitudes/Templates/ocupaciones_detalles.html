@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<h1>
+    {% if ocupacion %}
+        Editar Ocupación
+    {% else %}
+        Crear Ocupación
+    {% endif %}
+</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+        {% if ocupacion %}
+            Guardar cambios
+        {% else %}
+            Crear
+        {% endif %}
+    </button>
+</form>
+{% endblock %}

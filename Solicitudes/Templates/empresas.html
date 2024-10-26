@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+
+{% block content %}
+    <h1>Empresas</h1>
+
+    <a href="{% url 'empresa_add' %}">Add</a> 
+
+    <ul>
+        {% for empresa in empresas %}
+            <li>
+                {% if empresa and empresa.id_empresa %}
+                <p>{{empresa.id_empresa}}</p>
+                <p>{{empresa.nombre_empresa}}</p>
+                <a href="{% url 'empresa_edit' empresa.id_empresa %}">Editar</a>
+                <a href="{% url 'empresa_delete' empresa.id_empresa %}">Eliminar</a>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No hay empresas disponibles.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

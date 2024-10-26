@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Detalles de la Solicitud {{ solicitud.id_solicitud }}</h1>
+    <p>Fecha de Solicitud: {{ solicitud.fecha_solicitud }}</p>
+    <p>Ocupacion de la Solicitud: {{ solicitud.id_ocupacion.nombre_ocupacion }}</p>
+    <p>Perfil de la Solicitud: {{ solicitud.perfil_solicitud }}</p>
+
+    <h2>Detalles</h2>
+    <form action="{% url 'actualizar_detalles' solicitud.id_solicitud %}" method="post">
+        {% csrf_token %}
+        <ul>
+            {% for detalle in detalles %}
+                <li>
+                    <p>Egresado: {{ detalle.id_egresado.nombre_egresado }}</p>
+                    <p>Estatus: {{ detalle.id_solicitud.get_estatus_solicitud_display }}</p>
+                    <p>Solicitado: 
+                        <input type="checkbox" name="selected_egresados" value="{{ detalle.id_detalle }}" {% if detalle.selected_egresado %}checked{% endif %}>
+                    </p>
+                </li>
+            {% empty %}
+                <li>No hay detalles disponibles.</li>
+            {% endfor %}
+        </ul>
+        <button type="submit" name="action" value="send_emails">Enviar Correos</button>
+        <button type="submit" name="action" value="complete_request">Completar Solicitud</button>
+
+
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+
+        <script>
+            // Duración del mensaje en milisegundos (5000 ms = 5 segundos)
+            setTimeout(function() {
+                const messagesDiv = document.getElementById("messages");
+                if (messagesDiv) {
+                    messagesDiv.style.display = "none";  // Oculta el contenedor de mensajes
+                }
+            }, 5000);  // Cambia este valor para ajustar la duración
+        </script>
+    </form>
+{% endblock %}
